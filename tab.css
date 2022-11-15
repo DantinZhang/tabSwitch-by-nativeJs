@@ -92,8 +92,7 @@ nav ul li span:last-child {
     border-top: 1px solid #ccc;
 }
 
-.tabscon section,
-.tabscon section.conactive {
+.tabscon section {
     display: none;
     width: 100%;
     height: 100%;
