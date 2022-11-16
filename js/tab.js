@@ -1,4 +1,4 @@
-var that;
+// var that;
 class Tab {
     constructor(id) {
         that = this;
@@ -31,17 +31,17 @@ class Tab {
         //0.1切换绑定事件
         for (let i = 0; i < this.lis.length; i++) {
             this.lis[i].index = i;  //给每个li添加index属性保存索引值
-            this.lis[i].onclick = this.toggleTab;
-            this.remove[i].onclick = this.removeTab; /* 删除绑定事件 */
+            this.lis[i].onclick = this.toggleTab.bind(this.lis[i],this);
+            this.remove[i].onclick = this.removeTab.bind(this.remove[i],this); /* 删除绑定事件 */
             this.spans[i].ondblclick = this.editTab; //编辑功能
             this.sections[i].ondblclick = this.editTab; //编辑功能
         }
         //0.2添加绑定事件
-        this.add.onclick = this.addTab;
+        this.add.onclick = this.addTab.bind(this.add, this);
     }
 
     //1.切换
-    toggleTab() {
+    toggleTab(that) {
         //排他思想
         that.clearClass();
         this.className = 'liactive';
@@ -56,7 +56,7 @@ class Tab {
     }
 
     //2.添加
-    addTab() {
+    addTab(that) {
         that.clearClass();
         let random = Math.random();
         //2.1创建元素
@@ -70,7 +70,7 @@ class Tab {
     }
 
     //3.删除
-    removeTab(e) {
+    removeTab(that,e) {
         e.stopPropagation();  //阻止事件冒泡到li的切换，只删除就行
         let index = this.parentNode.index;
         that.lis[index].remove();
